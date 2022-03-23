@@ -9,14 +9,13 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.weiming</groupId>
-    <artifactId>gongjixiaobai</artifactId>
+    <artifactId>aydaystudy</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>gongjixiaobai</name>
-    <description>dockerfile</description>
+    <packaging>jar</packaging>     
+    <name>daydaystudy</name>
+    <description>daydaystudy</description>
     <properties>
         <java.version>1.8</java.version>
-        <image.prefix>kevinyan001</image.prefix>
-        <docker.registry.url>10.122.100.102:5000</docker.registry.url>
     </properties>
     <dependencies>
         <dependency>
@@ -72,28 +71,7 @@
                         </exclude>
                     </excludes>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>com.spotify</groupId>
-                <artifactId>dockerfile-maven-plugin</artifactId>
-                <version>1.4.10</version>
-                <executions>
-                    <execution>
-                        <id>default</id>
-                        <goals>
-                            <goal>build</goal>
-                            <goal>push</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <repository>${docker.registry.url}/${image.prefix}/${artifactId}</repository>
-                    <tag>${project.version}</tag>
-                    <buildArgs>
-                        <JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
-                    </buildArgs>
-                </configuration>
-            </plugin>
+             </plugin>
         </plugins>
     </build>
 
