@@ -1,0 +1,37 @@
+apiVersion: v1  
+kind: Service  
+metadata:  
+  name: daydaystudy-service  
+  labels:  
+    app: daydaystudy-service 
+spec:  
+  ports:  
+    - name: http  
+      port: 8000  
+  selector:  
+    app: daydaystudy-service  
+---  
+apiVersion: extensions/v1beta1  
+kind: Deployment  
+metadata:  
+  name: daydaystudy-service  
+spec:  
+  replicas: 1  
+  template:  
+    metadata:  
+      labels:  
+        app: daydaystudy-service 
+        version: v1  
+    spec:  
+      containers:  
+        - name: daydaystudy-app  
+          image: $REGISTRY/$DOCKERHUB_NAMESPACE/daydaystudy:SNAPSHOT-$BUILD_NUMBER  
+          imagePullPolicy: IfNotPresent  
+          ports:  
+            - containerPort: 8000  
+          livenessProbe:  
+            httpGet:  
+              path: /  
+              port: 8000  
+            initialDelaySeconds: 5  
+            periodSeconds: 5
